@@ -1,20 +1,16 @@
 
-# --- Dashboard Streamlit avancé pour classification d'image de déchets via l'API Flask ---
+
+# --- Dashboard Streamlit avancé pour classification d'image de déchets (tout-en-un, sans API) ---
 import streamlit as st
-import requests
-import base64
 import pandas as pd
-import matplotlib.pyplot as plt
 import os
+import numpy as np
+import cv2
+from deployment_1.garb_class import get_model, predict_image, log_prediction, inject_style, show_stats
+
 
 st.set_page_config(page_title="Classification de déchets", layout="wide")
-
-
-# Injection du CSS custom
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-local_css(os.path.join("static", "style.css"))
+inject_style()
 
 
 # Sidebar navigation
@@ -31,7 +27,7 @@ LOG_FILE = "prediction_logs.csv"
 
 if page == "Classification":
     st.title("Classification d'image de déchets")
-    st.write("Uploadez une image de déchet, le modèle prédit la classe via l'API Flask.")
+    st.write("Uploadez une image de déchet, le modèle prédit la classe localement.")
 
     uploaded_file = st.file_uploader("Choisissez une image", type=["jpg", "jpeg", "png"])
     true_label = st.text_input("(Optionnel) Classe attendue (pour statistiques)")
@@ -39,54 +35,24 @@ if page == "Classification":
     if uploaded_file is not None:
         st.image(uploaded_file, caption="Image chargée", use_column_width=True)
         img_bytes = uploaded_file.read()
-        img_b64 = base64.b64encode(img_bytes).decode("utf-8")
-        api_url = "http://127.0.0.1:5000/classifyGarbage"
-        data = {"garbageImage": img_b64}
-        if st.button("Classer l'image"):
-            try:
-                response = requests.post(api_url, json=data)
-                if response.status_code == 200:
-                    result = response.json()
-                    predicted = result.get('classe', 'Inconnue')
-                    # Badge de statut
+        # Conversion en image numpy
+        file_bytes = np.asarray(bytearray(img_bytes), dtype=np.uint8)
+        img_np = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+        if img_np is None:
+            st.markdown(f'<div class="custom-toast error">Erreur de lecture de l\'image. Format non supporté.</div>', unsafe_allow_html=True)
+        else:
+            if st.button("Classer l'image"):
+                try:
+                    model = get_model()
+                    predicted = predict_image(img_np, model)
                     st.markdown(f'<span class="status-badge success">Succès</span>', unsafe_allow_html=True)
-                    # Affichage direct de la classe prédite
                     st.success(f"Classe prédite : {predicted}")
-                    # Enregistrement dans le log CSV
-                    log_data = {
-                        "image_name": uploaded_file.name,
-                        "predicted_class": predicted,
-                        "true_class": true_label,
-                        "timestamp": pd.Timestamp.now()
-                    }
-                    if os.path.exists(LOG_FILE):
-                        df = pd.read_csv(LOG_FILE)
-                        df = pd.concat([df, pd.DataFrame([log_data])], ignore_index=True)
-                    else:
-                        df = pd.DataFrame([log_data])
-                    df.to_csv(LOG_FILE, index=False)
-                else:
-                    st.markdown(f'<div class="custom-toast error">Erreur API : {response.status_code} - {response.text}</div>', unsafe_allow_html=True)
-            except Exception as e:
-                st.markdown(f'<div class="custom-toast error">Erreur de connexion à l\'API : {e}</div>', unsafe_allow_html=True)
+                    log_prediction(uploaded_file.name, predicted, true_label)
+                except Exception as e:
+                    st.markdown(f'<div class="custom-toast error">Erreur lors de la prédiction : {e}</div>', unsafe_allow_html=True)
 
 elif page == "Statistiques":
-    st.title("Statistiques de classification")
-    if os.path.exists(LOG_FILE):
-        df = pd.read_csv(LOG_FILE)
-        st.metric("Nombre total de prédictions", len(df))
-        # Export CSV
-        st.download_button("Télécharger l'historique (CSV)", data=df.to_csv(index=False), file_name="prediction_logs.csv", mime="text/csv")
-        if "true_class" in df.columns and df["true_class"].notnull().any():
-            df_valid = df[df["true_class"].notnull()]
-            accuracy = (df_valid["predicted_class"] == df_valid["true_class"]).mean()
-            st.metric("Taux de bon classement (accuracy)", f"{accuracy*100:.1f}%")
-        st.subheader("Répartition des classes prédites")
-        st.bar_chart(df["predicted_class"].value_counts())
-        # Toast info
-        st.markdown('<div class="custom-toast info">Statistiques à jour. Données exportables.</div>', unsafe_allow_html=True)
-    else:
-        st.markdown('<div class="custom-toast info">Aucune prédiction enregistrée pour le moment.</div>', unsafe_allow_html=True)
+    show_stats()
 
 
 elif page == "Aide":
