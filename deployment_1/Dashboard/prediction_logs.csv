@@ -1,0 +1,4 @@
+image_name,predicted_class,true_class,timestamp
+paper5.jpg,paper,paper,2025-06-12 14:45:25.973640
+paper5.jpg,paper,paper,2025-06-12 14:45:51.918939
+plastic6.jpg,glass,plastic,2025-06-12 14:46:39.534540
