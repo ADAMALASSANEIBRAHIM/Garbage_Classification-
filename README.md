@@ -22,19 +22,18 @@ requirements.txt, .gitignore, README.md
 ## Installation rapide
 1. **Cloner le repo**
    ```bash
-   git clone https://github.com/<VOTRE-UTILISATEUR>/<VOTRE-REPO>.git
-   Changr le répertoire de travail
+   git clone https://github.com/ADAMALASSANEIBRAHIM/Garbage_Classification-.git
+   cd Garbage_Classification
    ```
 # Créer un environnement virtuel
-python3.10 -m venv ml3  
-# Actuvation d'environnement virtuel 
-.\ml3\Scripts\Activat.ps1, dans powerShell
+python3.10 -m venv venv
+source venv/Scripts/activate  # Sous Git Bash
+# ou
+.\venv\Scripts\Activate.ps1  # Sous PowerShell
 
 2. **Installer les dépendances**
 Il faut souvent mettre à jour le pip install.
    ```bash
-   pip install -r API/requirements.txt
-   pip install -r Dashboard/requirements.txt
    pip install -r requirements.txt
    ```
 3. **Lancer l'API Flask** Faire en étant dans la racine du projet
