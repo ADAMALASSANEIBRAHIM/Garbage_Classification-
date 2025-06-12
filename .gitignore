@@ -1,0 +1,36 @@
+# Environnements virtuels
+venv/
+.env/
+
+# Fichiers Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Notebooks checkpoints
+*.ipynb_checkpoints/
+
+# Fichiers modèles et archives
+*.h5
+*.zip
+garbage-classification.zip
+garbage-classification/
+*.sqlite3
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit logs
+Dashboard/prediction_logs.csv
+
+# Kaggle API key
+kaggle.json
+
