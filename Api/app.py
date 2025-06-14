@@ -1,4 +1,3 @@
-
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
@@ -24,14 +23,17 @@ def classify_garbage():
         if not data or 'garbageImage' not in data:
             return jsonify({"error": "Aucune image reçue (clé 'garbageImage' manquante)"}), 400
         garbage_image_encoded = data.get('garbageImage')
+        print("[DEBUG] Taille base64 reçu :", len(garbage_image_encoded))
         try:
             garbage_image_decoded = base64.b64decode(garbage_image_encoded)
         except Exception as e:
             return jsonify({"error": f"Erreur lors du décodage base64 : {str(e)}"}), 400
-        # Dossier et nom cohérents avec functions.py
         image_folder = "garbageImage"
         image_filename = "garbagePhoto.png"
         save_image_from_base64(garbage_image_decoded, image_folder, image_filename)
+        output_path = os.path.join(image_folder, image_filename)
+        if os.path.exists(output_path):
+            print("[DEBUG] Taille fichier sauvegardé :", os.path.getsize(output_path), "octets")
         predicted_class = predict_garbage_image_class()
         return jsonify({"classe": predicted_class})
     except Exception as e:

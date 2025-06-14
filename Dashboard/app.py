@@ -65,7 +65,8 @@ if page == "Classification":
         st.image(uploaded_file, caption="Image chargée", use_column_width=True)
         img_bytes = uploaded_file.read()
         img_b64 = base64.b64encode(img_bytes).decode("utf-8")
-        api_url = "https://garbage-classification-lw9i.onrender.com/classifyGarbage"
+        st.write(f"Taille de l'image encodée (base64) : {len(img_b64)} caractères")
+        api_url = "https://garbage-classification-dashboard-wu0i.onrender.com/classifyGarbage"
         data = {"garbageImage": img_b64}
         if st.button("Classer l'image"):
             try:
