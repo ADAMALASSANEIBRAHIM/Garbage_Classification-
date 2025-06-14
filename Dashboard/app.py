@@ -62,8 +62,8 @@ if page == "Classification":
     true_label = st.text_input("(Optionnel) Classe attendue (pour statistiques)")
 
     if uploaded_file is not None:
-        st.image(uploaded_file, caption="Image chargée", use_column_width=True)
         img_bytes = uploaded_file.read()
+        st.write(f"Taille du fichier uploadé : {len(img_bytes)} octets")
         img_b64 = base64.b64encode(img_bytes).decode("utf-8")
         st.write(f"Taille de l'image encodée (base64) : {len(img_b64)} caractères")
         api_url = "https://garbage-classification-dashboard-wu0i.onrender.com/classifyGarbage"
