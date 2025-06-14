@@ -9,7 +9,7 @@ Plateforme professionnelle, pédagogique et autonome pour la classification d'im
 - **Application Streamlit autonome** prête pour le cloud (dossier `deployment_1`)
 - **Persistance des résultats** et visualisation dynamique
 - **Modèle VGG16 décoré** (fine-tuning sur dataset déchets)
-- **Design responsive, notifications toast, badges, loader animé**
+
 
 ## Structure du projet
 ```
@@ -38,9 +38,15 @@ requirements.txt, .gitignore, README.md
    pip install --upgrade pip
    pip install -r requirements.txt
    ```
+4. **Installer l'API**
+```bash
+   cd Api
+   python app.py
+```
 4. **Lancer l'application Streamlit autonome**
    ```bash
-   streamlit run deployment_1/main_app.py
+      cd Dashboard
+      streamlit run app.py
    ```
 
 ## Pour utiliser l'API Flask ou l'ancien dashboard
