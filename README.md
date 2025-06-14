@@ -6,7 +6,7 @@ Plateforme professionnelle, pédagogique et autonome pour la classification d'im
 - **Classification d'images** via une interface web ergonomique
 - **API Flask** robuste pour la prédiction 
 - **Dashboard Streamlit** interactif (upload, stats, export CSV)
-- **Application Streamlit autonome** prête pour le cloud moyennant      déploiement de l'API
+- **Application Streamlit** prête pour le cloud moyennant      déploiement de l'API
 
 
 
