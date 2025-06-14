@@ -10,6 +10,9 @@ __pycache__/
 
 # Notebooks checkpoints
 *.ipynb_checkpoints/
+# 
+test_garb_class.py
+garb_class.py
 
 # Fichiers modèles et archives
 *.h5
@@ -17,7 +20,7 @@ __pycache__/
 garbage-classification.zip
 garbage-classification/
 *.sqlite3
-
+Dashboard/static/comparaison_modeles.png
 # Fichiers système
 .DS_Store
 Thumbs.db

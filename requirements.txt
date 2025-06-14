@@ -20,3 +20,4 @@ scikit_learn
 seaborn
 mlflow
 gunicorn
+streamlit-option-menu

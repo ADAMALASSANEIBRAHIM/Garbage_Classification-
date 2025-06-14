@@ -11,9 +11,10 @@ import matplotlib.pyplot as plt
 # Informations d'authentification pour Kaggle
 # Vous devez remplacer ces valeurs par vos propres informations d'authentification
 api_token = {
-    #mets tes réfs
-
+    "username": "TON_USERNAME",
+    "key": "TA_CLE_API"
 }
+
 
 with open('kaggle.json', 'w') as file:
     json.dump(api_token, file)
@@ -25,7 +26,9 @@ os.chmod('kaggle.json', 0o600)
 
 # Utiliser la bibliothèque Kaggle pour télécharger un fichier
 # Exemple : Remplacez 'dataset-owner/dataset-name' par l'identifiant du dataset que vous souhaitez télécharger
-!kaggle datasets download -d asdasdasasdas/garbage-classification
+api = KaggleApi()
+api.authenticate()
+api.dataset_download_files('asdasdasasdas/garbage-classification', path='.', unzip=False)
 # Extraction des fiichiers Zipper
 with zipfile.ZipFile('garbage-classification.zip', 'r') as zip_ref:
     zip_ref.extractall('garbage-classification')
@@ -34,7 +37,7 @@ print(files)
 
 def read_data(data_path):
     """
-    Lit les images et leurs étiquettes depuis un dossier structuré par classes.
+    Lire les images et leurs étiquettes depuis un dossier structuré par classes.
 
     Paramètres :
     - data_path (str) : chemin vers le dossier principal contenant les sous-dossiers de classes.

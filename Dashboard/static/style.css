@@ -1,20 +1,13 @@
 /* --- Thème écologique personnalisé --- */
 body, .stApp {
-    background: linear-gradient(120deg, #d0f5d8 0%, #a7e9af 50%, #b2dfdb 100%) !important;
+    background: #f3f3f3 !important;
     min-height: 100vh;
     background-attachment: fixed;
 }
 
-/* Optionnel : motif feuille SVG en watermark */
+/* Suppression du motif feuille SVG en watermark */
 .stApp::before {
-    content: "";
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    opacity: 0.08;
-    z-index: 0;
-    pointer-events: none;
-    background: url('https://www.transparenttextures.com/patterns/leaf.png');
-    background-repeat: repeat;
+    content: none;
 }
 
 .custom-footer {
