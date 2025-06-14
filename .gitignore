@@ -13,7 +13,8 @@ __pycache__/
 # 
 test_garb_class.py
 garb_class.py
-
+test_api.py
+glass2.jpg
 # Fichiers modèles et archives
 *.h5
 *.zip
@@ -36,4 +37,3 @@ Dashboard/prediction_logs.csv
 
 # Kaggle API key
 kaggle.json
-

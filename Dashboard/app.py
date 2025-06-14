@@ -1,4 +1,5 @@
 # --- Dashboard Streamlit avancé pour classification d'image de déchets (tout-en-un, sans API) ---
+import http
 import streamlit as st
 import requests
 import base64
@@ -64,9 +65,10 @@ if page == "Classification":
     if uploaded_file is not None:
         img_bytes = uploaded_file.read()
         st.write(f"Taille du fichier uploadé : {len(img_bytes)} octets")
+        st.image(uploaded_file, caption="Image chargée", use_column_width=True)
         img_b64 = base64.b64encode(img_bytes).decode("utf-8")
         st.write(f"Taille de l'image encodée (base64) : {len(img_b64)} caractères")
-        api_url = "https://garbage-classification-lw9i.onrender.com/classifyGarbage"
+        api_url = "http://127.0.0.1:5000/classifyGarbage"  # URL de l'API Flask
         data = {"garbageImage": img_b64}
         if st.button("Classer l'image"):
             try:

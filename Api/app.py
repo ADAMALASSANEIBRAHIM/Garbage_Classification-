@@ -29,12 +29,13 @@ def classify_garbage():
         except Exception as e:
             return jsonify({"error": f"Erreur lors du décodage base64 : {str(e)}"}), 400
         image_folder = "garbageImage"
-        image_filename = "garbagePhoto.png"
+        image_filename = data.get('filename', 'garbagePhoto.png')
         save_image_from_base64(garbage_image_decoded, image_folder, image_filename)
         output_path = os.path.join(image_folder, image_filename)
         if os.path.exists(output_path):
             print("[DEBUG] Taille fichier sauvegardé :", os.path.getsize(output_path), "octets")
-        predicted_class = predict_garbage_image_class()
+        # Adapter la fonction de prédiction pour utiliser le bon nom de fichier
+        predicted_class = predict_garbage_image_class(image_filename)
         return jsonify({"classe": predicted_class})
     except Exception as e:
         return jsonify({"error": f"Erreur serveur : {str(e)}"}), 500
