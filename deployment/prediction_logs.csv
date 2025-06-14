@@ -1,5 +1,0 @@
-image_name,predicted_class,true_class,timestamp
-plastic5.jpg,plastic,plastic,2025-06-12 15:31:15.804167
-cardboard5.jpg,cardboard,,2025-06-14 18:17:34.360419
-cardboard5.jpg,paper,,2025-06-14 19:23:21.237167
-cardboard6.jpg,cardboard,,2025-06-14 19:26:14.976259
