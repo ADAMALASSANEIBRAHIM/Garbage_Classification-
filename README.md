@@ -50,14 +50,13 @@ requirements.txt, .gitignore, README.md
    ```
 
 ## Pour utiliser l'API Flask ou l'ancien dashboard
-Voir les dossiers `API/` et `Dashboard/` pour les instructions legacy.
+Le dashboard est déployé sur stremlit et accessible via le lien suivant: 
+https://adamalassaneibrahim-garbage-classification--dashboardapp-qtknhv.streamlit.app/
+Ce dernier va faire appel à une API qui est logée sur Render et accessible via le lien suivant: https://garbage-classification-lw9i.onrender.com/
 
-## Déploiement
-- **Local** : voir ci-dessus
-- **Cloud** : Docker, Streamlit Cloud, Render, Heroku, Azure, etc. (voir section Déploiement dans le code ou demander un exemple de Dockerfile)
 
 ## Modèle utilisé
 Le modèle principal est **VGG16 décoré** 
 Ce modèle est choisi suite à une validation croisée entre 3 modèle, à savoir: le Resnet50, le CNN simple et bien évidemment le VGG16.
 ## Contact
-adamalassaneibrahim@gmail.com 
+adamalassaneibrahim@gmail.com  || mohtra606@gmail.com
