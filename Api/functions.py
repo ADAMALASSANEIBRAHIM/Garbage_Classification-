@@ -5,6 +5,7 @@ import numpy as np
 import glob # pour la recherche de fichiers
 import base64
 import logging
+from PIL import Image
 
 # Configuration du logger
 logging.basicConfig(
@@ -16,15 +17,18 @@ logger = logging.getLogger(__name__)
 
 def decode_image_from_file(image_path):
     """
-    Décode une image depuis le système de fichiers.
+    Décode une image depuis le système de fichiers avec Pillow (plus tolérant qu'OpenCV).
     Lève une erreur si l'image est vide ou non décodable.
     """
-    img_array = cv2.imread(image_path)
-    if img_array is None:
-        logger.error(f"Image non décodable ou vide : {image_path}")
+    try:
+        img = Image.open(image_path)
+        img = img.convert('RGB')  # Assure un format compatible
+        img_array = np.array(img)
+        logger.info(f"Image chargée avec succès (Pillow) : {image_path}, shape={img_array.shape}")
+        return img_array
+    except Exception as e:
+        logger.error(f"Image non décodable ou vide (Pillow) : {image_path} ({e})")
         raise ValueError(f"Image non décodable ou vide : {image_path}")
-    logger.info(f"Image chargée avec succès : {image_path}, shape={img_array.shape}")
-    return img_array
 
 
 # Enregistre une image décodée depuis du base64 dans un dossier donné
