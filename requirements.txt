@@ -3,7 +3,7 @@ flask-restful
 flask-cors
 numpy
 opencv-python
-tensorflow
+tensorflow==2.13.0
 gdown
 streamlit
 requests
