@@ -2,3 +2,4 @@ streamlit
 requests
 pandas
 streamlit-option-menu
+gunicorn>=20.0.0
