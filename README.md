@@ -4,11 +4,10 @@ Plateforme professionnelle, pédagogique et autonome pour la classification d'im
 
 ## Fonctionnalités principales
 - **Classification d'images** via une interface web ergonomique
-- **API Flask** robuste pour la prédiction (mode legacy)
+- **API Flask** robuste pour la prédiction 
 - **Dashboard Streamlit** interactif (upload, stats, export CSV)
-- **Application Streamlit autonome** prête pour le cloud (dossier `deployment_1`)
-- **Persistance des résultats** et visualisation dynamique
-- **Modèle VGG16 décoré** (fine-tuning sur dataset déchets)
+- **Application Streamlit autonome** prête pour le cloud moyennant      déploiement de l'API
+
 
 
 ## Structure du projet
@@ -49,14 +48,12 @@ requirements.txt, .gitignore, README.md
       streamlit run app.py
    ```
 
-## Pour utiliser l'API Flask ou l'ancien dashboard
-Le dashboard est déployé sur stremlit et accessible via le lien suivant: 
-https://adamalassaneibrahim-garbage-classification--dashboardapp-qtknhv.streamlit.app/
-Ce dernier va faire appel à une API qui est logée sur Render et accessible via le lien suivant: https://garbage-classification-lw9i.onrender.com/
-
-
 ## Modèle utilisé
 Le modèle principal est **VGG16 décoré** 
 Ce modèle est choisi suite à une validation croisée entre 3 modèle, à savoir: le Resnet50, le CNN simple et bien évidemment le VGG16.
+
+## Présentation format projet
+https://drive.google.com/file/d/1WIo8vdVmIoAm0VncBfbk-xMWkTLuB4rE/view?usp=sharing
+
 ## Contact
 adamalassaneibrahim@gmail.com  || mohtra606@gmail.com
