@@ -21,3 +21,8 @@ seaborn
 mlflow
 gunicorn
 streamlit-option-menu
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+gunicorn>=21.0.0
+python-multipart
+pydantic
