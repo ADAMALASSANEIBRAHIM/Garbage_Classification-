@@ -13,6 +13,8 @@ __pycache__/
 # 
 test_garb_class.py
 garb_class.py
+check_and_install.py
+config.py
 test_api.py
 glass2.jpg
 # Fichiers modèles et archives

@@ -12,10 +12,9 @@ Plateforme professionnelle, pédagogique et autonome pour la classification d'im
 
 ## Structure du projet
 ```
-API/             # API Flask pour la prédiction (optionnel)
+Api/             # API Flask pour la prédiction (optionnel)
 Dashboard/       # Dashboard Streamlit (legacy)
-deployment_1/    # Nouvelle application Streamlit tout-en-un (recommandé)
-Models/          # Modèles entraînés (VGG16, etc.)
+Analyse/
 requirements.txt, .gitignore, README.md
 ```
 
@@ -42,7 +41,7 @@ requirements.txt, .gitignore, README.md
    cd Api
    python app.py
 ```
-4. **Lancer l'application Streamlit autonome**
+4. **Lancer l'application Streamlit dans un nouveau bash**
    ```bash
       cd Dashboard
       streamlit run app.py
